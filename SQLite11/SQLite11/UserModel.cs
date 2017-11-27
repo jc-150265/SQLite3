@@ -26,8 +26,9 @@ namespace SQLite11
 
                 try
                 {
-                    //データベースにUserテールブを作成します
+                    //データベースにUserテーブルを作成します
                     db.CreateTable<UserModel>(); //エラーが出るから<UserModel>付けた
+                                                 //これでなぜか動く!
 
                     //Userテーブルに行追加します
                     db.Insert(new UserModel() { Name = name });

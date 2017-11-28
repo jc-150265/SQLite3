@@ -42,7 +42,7 @@ namespace SQLite11
             UserModel.insertUser("田中");
             UserModel.insertUser("斎藤");
 
-            var buttonAdd = new Button
+            var buttonAdd = new Button 
             {
                 WidthRequest = 60,
                 TextColor = Color.White,

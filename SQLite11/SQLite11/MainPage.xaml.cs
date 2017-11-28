@@ -45,7 +45,7 @@ namespace SQLite11
             var buttonAdd = new Button 
             {
                 WidthRequest = 60,
-                TextColor = Color.White,
+                TextColor = Color.Aqua,
                 Text = "Add"
             };
 

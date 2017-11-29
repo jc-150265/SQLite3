@@ -48,8 +48,9 @@ namespace SQLite11
             var query = UserModel.selectUser();
 
 
-            Button button = new Button
+            Button Insert = new Button
             {
+                WidthRequest = 60,
                 Text = "Insert!",
                 TextColor = Color.Red,
                 Font = Font.SystemFontOfSize(NamedSize.Large),
@@ -57,7 +58,8 @@ namespace SQLite11
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.CenterAndExpand
             };
-            button.Clicked += OnButtonClicked;
+            layout.Children.Add(Insert);
+            Insert.Clicked += OnButtonClicked;
 
 
 

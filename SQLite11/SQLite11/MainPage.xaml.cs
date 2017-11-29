@@ -74,7 +74,7 @@ namespace SQLite11
             layout.Children.Add(Select);
             Select.Clicked += SelectClicked;
 
-            
+            Content = layout;
         }
 
         void SelectClicked(object sender, EventArgs e)

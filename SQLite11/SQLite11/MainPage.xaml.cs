@@ -11,7 +11,7 @@ namespace SQLite11
         public MainPage()
         {
             InitializeComponent();
-
+            　
             var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center, Margin = new Thickness { Top = 100 } };
 
             //Userテーブルに適当なデータを追加

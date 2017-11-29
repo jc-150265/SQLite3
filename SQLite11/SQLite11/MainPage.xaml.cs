@@ -48,7 +48,7 @@ namespace SQLite11
             var query = UserModel.selectUser();
 
 
-            Button Insert = new Button
+            var Insert = new Button
             {
                 WidthRequest = 60,
                 Text = "Insert!",

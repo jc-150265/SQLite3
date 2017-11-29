@@ -53,10 +53,8 @@ namespace SQLite11
                 WidthRequest = 60,
                 Text = "Insert!",
                 TextColor = Color.Red,
-                Font = Font.SystemFontOfSize(NamedSize.Large),
-                BorderWidth = 1,
-                HorizontalOptions = LayoutOptions.Center,
-                VerticalOptions = LayoutOptions.CenterAndExpand
+                /*HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.CenterAndExpand*/
             };
             layout.Children.Add(Insert);
             Insert.Clicked += OnButtonClicked;

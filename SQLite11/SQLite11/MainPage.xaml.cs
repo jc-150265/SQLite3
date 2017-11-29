@@ -48,9 +48,9 @@ namespace SQLite11
             var query = UserModel.selectUser();
 
 
-            var button = new Button
+            Button button = new Button
             {
-                Text = "Click Me!",
+                Text = "Insert!",
                 TextColor = Color.Red,
                 Font = Font.SystemFontOfSize(NamedSize.Large),
                 BorderWidth = 1,

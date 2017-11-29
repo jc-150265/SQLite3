@@ -7,7 +7,7 @@ using SQLite;
 namespace SQLite11
 {
     //テーブル名を指定
-    [Table("User")]
+    [Table("User2")]
     public class UserModel
     {
         //プライマリキー　自動採番されます
@@ -54,7 +54,7 @@ namespace SQLite11
                 try
                 {
                     //データベースに指定したSQLを発行します
-                    return db.Query<UserModel>("SELECT * FROM [User] "); //エラーが出るから<UserModel>付けた
+                    return db.Query<UserModel>("SELECT * FROM [User2] "); //エラーが出るから<UserModel>付けた
 
                 }
                 catch (Exception e)

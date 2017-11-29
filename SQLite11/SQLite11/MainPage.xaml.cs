@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 
 //参考url http://dev-suesan.hatenablog.com/entry/2017/03/06/005206
 
@@ -37,22 +38,29 @@ namespace SQLite11
 
             var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center, Margin = new Thickness { Top = 100 } };
 
+            /*
             //Userテーブルに適当なデータを追加する
             UserModel.insertUser("鈴木");
             UserModel.insertUser("田中");
-            UserModel.insertUser("斎藤");
-
-            var buttonAdd = new Button 
-            {
-                WidthRequest = 60,
-                TextColor = Color.Aqua,
-                Text = "Add"
-            };
-
-            layout.Children.Add(buttonAdd);
+            UserModel.insertUser("斎藤");*/
 
             //Userテーブルの行データを取得
             var query = UserModel.selectUser();
+
+
+            var button = new Button
+            {
+                Text = "Click Me!",
+                TextColor = Color.Red,
+                Font = Font.SystemFontOfSize(NamedSize.Large),
+                BorderWidth = 1,
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.CenterAndExpand
+            };
+            button.Clicked += OnButtonClicked;
+
+
+
 
             foreach (var user in query)
             {
@@ -63,5 +71,16 @@ namespace SQLite11
 
             Content = layout;
         }
+
+        void OnButtonClicked(object sender, EventArgs e)
+        {
+            //Userテーブルに適当なデータを追加する
+            UserModel.insertUser("鈴木");
+            UserModel.insertUser("田中");
+            UserModel.insertUser("斎藤");
+        }
     }
+
+
+}
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using SQLite;
 
 //参考url http://dev-suesan.hatenablog.com/entry/2017/03/06/005206
+//SQLメソッドの参考url https://www.tmp1024.com/programming/use-sqlite
 
 namespace SQLite11
 {
@@ -17,10 +18,11 @@ namespace SQLite11
         //名前カラム
         public string Name { get; set; }
 
-        //Userテーブルに行追加するためのメソッドです
+        //Userテーブルに行追加するメソッドです
+            //Insert文的なの
         public static void insertUser(string name)
         {
-            //データベースに接続します
+            //データベースに接続
             using (SQLiteConnection db = new SQLiteConnection(App.dbPath))
             {
 
@@ -45,7 +47,30 @@ namespace SQLite11
                 }
             }
         }
+        /*
+        //Userテーブルのuserを削除するメソッド
+            //delete文的なの
+        public static void deleteUser(string name)
+        {
+            //データベースに接続
+            using (SQLiteConnection db = new SQLiteConnection(App.dbPath))
+            {
+                try
+                {
+                    db.CreateTable<UserModel>();
+                        
+                    db.Delete<UserModel>();
+                }
+                catch (Exception e)
+                {
+                    
+                }
+            }
+        }
+        */
+
         //Userテーブルの行データを取得します
+            //select文的なの
         public static List<UserModel> selectUser() //エラーが出るから<UserModel>付けた
         {
             using (SQLiteConnection db = new SQLiteConnection(App.dbPath))

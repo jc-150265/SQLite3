@@ -96,7 +96,7 @@ namespace SQLite11
         //deleteメソッド
         void DeleteClicked(object sender, EventArgs e)
         {
-            UserModel.deleteUser(1);
+            UserModel.deleteUser(2);
 
         }
         //selectメソッド
@@ -104,7 +104,7 @@ namespace SQLite11
         {
             //Userテーブルの行データを取得
             var query = UserModel.selectUser(); //中身はSELECT * FROM [User]
-            var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center, Margin = new Thickness { Top = 100 } };
+            var layout = new ScrollView { HorizontalOptions = LayoutOptions.Center, Margin = new Thickness { Top = 100 } };
             foreach (var user in query)
             {
                 //Userテーブルの名前列をLabelに書き出す

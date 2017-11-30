@@ -61,6 +61,7 @@ namespace SQLite11
                 Text = "Delete!",
                 TextColor = Color.Red,
             };
+            
             layout.Children.Add(Delete);
             Delete.Clicked += DeleteClicked;
 
@@ -101,8 +102,8 @@ namespace SQLite11
 
         void DeleteClicked(object sender, EventArgs e)
         {
-            //Userテーブルに適当なデータを追加する まだです
-            //UserModel.deleteUser("鈴木");
+
+            UserModel.deleteUser("鈴木");
 
         }
     }

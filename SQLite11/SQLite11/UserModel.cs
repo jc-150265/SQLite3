@@ -47,28 +47,31 @@ namespace SQLite11
                 }
             }
         }
-        /*
+        
         //Userテーブルのuserを削除するメソッド
             //delete文的なの
-        public static void deleteUser()
+        public static void deleteUser(string name)
         {
+
             //データベースに接続
             using (SQLiteConnection db = new SQLiteConnection(App.dbPath))
             {
-                db.BeginTransaction();  //このサイト https://qiita.com/alzybaad/items/9356b5a651603a548278
+                //db.BeginTransaction();  //このサイト https://qiita.com/alzybaad/items/9356b5a651603a548278
                 try
                 {
                     db.CreateTable<UserModel>();
-                        
-                    db.Delete<UserModel>();
+
+                    db.Delete(name);
                 }
                 catch (Exception e)
                 {
-                    
+                    db.Rollback();
+                    System.Diagnostics.Debug.WriteLine(e);
                 }
             }
+
         }
-        */
+        
 
         //Userテーブルの行データを取得します
             //select文的なの

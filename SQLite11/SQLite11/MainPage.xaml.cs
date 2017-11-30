@@ -48,13 +48,13 @@ namespace SQLite11
                 Text = "Insert!",
                 TextColor = Color.Red,
             };
-            layout.Children.Add(Insert);
-            Insert.Clicked += InsertClicked;
             var insertEntry = new Entry
             {
                 WidthRequest = 60
             };
-
+            layout.Children.Add(Insert);
+            Insert.Clicked += InsertClicked;
+            
             //--------------------------------deleteします------------------------------
             var Delete = new Button
             {
@@ -62,13 +62,13 @@ namespace SQLite11
                 Text = "Delete!",
                 TextColor = Color.Red,
             };
-            layout.Children.Add(Delete);
-            Delete.Clicked += DeleteClicked;
             deleteEntry = new Entry
             {
                 WidthRequest = 60,
             };
-
+            layout.Children.Add(Delete);
+            Delete.Clicked += DeleteClicked;
+            
             //--------------------------------selectします------------------------------
             var Select = new Button
             {
@@ -106,7 +106,7 @@ namespace SQLite11
 
         void DeleteClicked(object sender, EventArgs e)
         {
-            //UserModel.deleteUser();
+            UserModel.deleteUser(1);
 
         }
     }

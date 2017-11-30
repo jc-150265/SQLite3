@@ -33,7 +33,6 @@ namespace SQLite11
 
         }*/
         public MainPage()
-
         {
             InitializeComponent();
 

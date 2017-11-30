@@ -62,6 +62,7 @@ namespace SQLite11
                 TextColor = Color.Red,
             };
             
+
             layout.Children.Add(Delete);
             Delete.Clicked += DeleteClicked;
 

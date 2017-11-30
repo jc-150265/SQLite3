@@ -7,6 +7,7 @@ namespace SQLite11
 {
     public partial class MainPage : ContentPage
     {
+        //http://www.atmarkit.co.jp/ait/articles/1612/28/news021.html　ScrollView
         /*
         public MainPage()
         {
@@ -82,6 +83,23 @@ namespace SQLite11
             Content = layout;
         }
 
+        //insertメソッド
+        void InsertClicked(object sender, EventArgs e)
+        {
+            
+            var text = insertEntry.Text;
+            //Userテーブルに適当なデータを追加する
+            UserModel.insertUser(text);
+
+        }
+
+        //deleteメソッド
+        void DeleteClicked(object sender, EventArgs e)
+        {
+            UserModel.deleteUser(1);
+
+        }
+        //selectメソッド
         void SelectClicked(object sender, EventArgs e)
         {
             //Userテーブルの行データを取得
@@ -93,21 +111,6 @@ namespace SQLite11
                 layout.Children.Add(new Label { Text = user.Name });
             }
             Content = layout;
-        }
-
-        void InsertClicked(object sender, EventArgs e)
-        {
-            
-            var text = insertEntry.Text;
-            //Userテーブルに適当なデータを追加する
-            UserModel.insertUser(text);
-
-        }
-
-        void DeleteClicked(object sender, EventArgs e)
-        {
-            UserModel.deleteUser(1);
-
         }
     }
 

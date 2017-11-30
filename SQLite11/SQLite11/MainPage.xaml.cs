@@ -35,6 +35,7 @@ namespace SQLite11
         }*/
         private Entry insertEntry; //insertの入力フィールド
         private Entry deleteEntry; //deleteの入力フィールド
+        private string sb;
 
         public MainPage()
         {
@@ -96,21 +97,40 @@ namespace SQLite11
         //deleteメソッド
         void DeleteClicked(object sender, EventArgs e)
         {
-            UserModel.deleteUser(2);
+            UserModel.deleteUser(1);
 
         }
         //selectメソッド
         void SelectClicked(object sender, EventArgs e)
         {
+            /*
             //Userテーブルの行データを取得
             var query = UserModel.selectUser(); //中身はSELECT * FROM [User]
-            var layout = new ScrollView { HorizontalOptions = LayoutOptions.Center, Margin = new Thickness { Top = 100 } };
+            var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center, Margin = new Thickness { Top = 100 } };
             foreach (var user in query)
             {
                 //Userテーブルの名前列をLabelに書き出す
                 layout.Children.Add(new Label { Text = user.Name });
             }
             Content = layout;
+            */
+
+            var query = UserModel.selectUser(); //中身はSELECT * FROM [User]
+            foreach (var user in query)
+            {
+                var sb = new Label { Text = user.Name };
+            }
+            var scrollView = new ScrollView
+            {
+                VerticalOptions = LayoutOptions.FillAndExpand,
+                //ラベルを配置する
+                Content = new Label
+                {
+                    Text = sb.ToString(),
+                    FontSize = 20,
+                    TextColor = Color.FromHex("82DADA")
+                }
+            };
         }
     }
 

@@ -19,7 +19,7 @@ namespace SQLite11
         public string Name { get; set; }
 
         //Userテーブルに行追加するメソッドです
-            //Insert文的なの
+            //------------------------Insert文的なの--------------------------
         public static void insertUser(string name)
         {
             //データベースに接続
@@ -29,8 +29,7 @@ namespace SQLite11
                 try
                 {
                     //データベースにUserテーブルを作成します
-                    db.CreateTable<UserModel>(); //エラーが出るから<UserModel>付けた
-                                                 //これでなぜか動く!
+                    db.CreateTable<UserModel>();
 
                     //Userテーブルに行追加します
                     db.Insert(new UserModel() { Name = name });
@@ -47,10 +46,33 @@ namespace SQLite11
                 }
             }
         }
-        
+        /*
+        //id name オーバーロード
+        public static void insertUser(int id, string name)
+        {
+            //データベースに接続する
+            using (SQLiteConnection db = new SQLiteConnection(App.dbPath))
+            {
+                try
+                {
+                    //データベースにUserテーブルを作成する
+                    db.CreateTable<UserModel>();
+
+                    db.Insert(new UserModel() { Name = name, Id = id });
+                    db.Commit();
+                }
+                catch (Exception e)
+                {
+                    db.Rollback();
+                    System.Diagnostics.Debug.WriteLine(e);
+                }
+            }
+        }
+        */
+
         //Userテーブルのuserを削除するメソッド
-            //delete文的なの
-        public static void deleteUser(string name)
+        //--------------------------delete文的なの--------------------------
+        public static void deleteUser(int id)
         {
 
             //データベースに接続
@@ -61,7 +83,7 @@ namespace SQLite11
                 {
                     db.CreateTable<UserModel>();
 
-                    db.Delete(name);
+                    db.Delete(id);
                 }
                 catch (Exception e)
                 {
@@ -71,10 +93,10 @@ namespace SQLite11
             }
 
         }
-        
+
 
         //Userテーブルの行データを取得します
-            //select文的なの
+        //--------------------------select文的なの--------------------------
         public static List<UserModel> selectUser() //エラーが出るから<UserModel>付けた
         {
             using (SQLiteConnection db = new SQLiteConnection(App.dbPath))
@@ -83,7 +105,7 @@ namespace SQLite11
                 try
                 {
                     //データベースに指定したSQLを発行します
-                    return db.Query<UserModel>("SELECT * FROM [User] "); //エラーが出るから<UserModel>付けた
+                    return db.Query<UserModel>("SELECT * FROM [User] ORDER BY Id DESC"); //エラーが出るから<UserModel>付けた
 
                 }
                 catch (Exception e)

@@ -103,7 +103,7 @@ namespace SQLite11
         void DeleteClicked(object sender, EventArgs e)
         {
 
-            UserModel.deleteUser("鈴木");
+            UserModel.deleteUser(1);
 
         }
     }

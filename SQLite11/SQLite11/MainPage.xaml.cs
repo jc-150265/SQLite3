@@ -32,6 +32,9 @@ namespace SQLite11
             Content = layout;
 
         }*/
+        private Entry insertEntry; //insertの入力フィールド
+        private Entry deleteEntry; //deleteの入力フィールド
+
         public MainPage()
         {
             InitializeComponent();
@@ -53,6 +56,10 @@ namespace SQLite11
             };
             layout.Children.Add(Insert);
             Insert.Clicked += InsertClicked;
+            insertEntry = new Entry
+            {
+                WidthRequest = 60
+            };
 
             //--------------------------------deleteします------------------------------
             var Delete = new Button
@@ -61,9 +68,12 @@ namespace SQLite11
                 Text = "Delete!",
                 TextColor = Color.Red,
             };
-            
             layout.Children.Add(Delete);
             Delete.Clicked += DeleteClicked;
+            deleteEntry = new Entry
+            {
+                WidthRequest = 60,
+            };
 
             //--------------------------------selectします------------------------------
             var Select = new Button
@@ -93,17 +103,16 @@ namespace SQLite11
 
         void InsertClicked(object sender, EventArgs e)
         {
+            
+            var text = insertEntry.Text;
             //Userテーブルに適当なデータを追加する
-            UserModel.insertUser("鈴木");
-            UserModel.insertUser("田中");
-            UserModel.insertUser("斎藤");
+            UserModel.insertUser(text);
 
         }
 
         void DeleteClicked(object sender, EventArgs e)
         {
-
-            UserModel.deleteUser(1);
+            UserModel.deleteUser(2);
 
         }
     }

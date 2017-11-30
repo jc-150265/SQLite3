@@ -41,12 +41,6 @@ namespace SQLite11
 
             var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center, Margin = new Thickness { Top = 100 } };
 
-            /*
-            //Userテーブルに適当なデータを追加する
-            UserModel.insertUser("鈴木");
-            UserModel.insertUser("田中");
-            UserModel.insertUser("斎藤");*/
-
             //-------------------------------insertします-------------------------------
             var Insert = new Button
             {
@@ -56,7 +50,7 @@ namespace SQLite11
             };
             layout.Children.Add(Insert);
             Insert.Clicked += InsertClicked;
-            insertEntry = new Entry
+            var insertEntry = new Entry
             {
                 WidthRequest = 60
             };
@@ -112,7 +106,7 @@ namespace SQLite11
 
         void DeleteClicked(object sender, EventArgs e)
         {
-            UserModel.deleteUser(2);
+            //UserModel.deleteUser();
 
         }
     }

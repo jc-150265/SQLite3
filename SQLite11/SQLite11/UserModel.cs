@@ -97,7 +97,7 @@ namespace SQLite11
 
         //Userテーブルの行データを取得します
         //--------------------------select文的なの--------------------------
-        public static List<UserModel> selectUser() //エラーが出るから<UserModel>付けた
+        public static List<UserModel> selectUser()
         {
             using (SQLiteConnection db = new SQLiteConnection(App.dbPath))
             {
@@ -105,7 +105,7 @@ namespace SQLite11
                 try
                 {
                     //データベースに指定したSQLを発行します
-                    return db.Query<UserModel>("SELECT * FROM [User] ORDER BY Id DESC"); //エラーが出るから<UserModel>付けた
+                    return db.Query<UserModel>("SELECT * FROM [User]");
 
                 }
                 catch (Exception e)

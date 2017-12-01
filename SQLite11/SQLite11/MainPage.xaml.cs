@@ -8,7 +8,7 @@ namespace SQLite11
     public partial class MainPage : ContentPage
     {
         //http://www.atmarkit.co.jp/ait/articles/1612/28/news021.html　ScrollView
-        /*
+        
         public MainPage()
         {
             InitializeComponent();
@@ -32,7 +32,9 @@ namespace SQLite11
 
             Content = layout;
 
-        }*/
+        }
+
+        /*
         private Entry insertEntry; //insertの入力フィールド
         private Entry deleteEntry; //deleteの入力フィールド
         private int deleteId; //削除Idフィールド
@@ -139,7 +141,7 @@ namespace SQLite11
                 }
             };
             Content = scrollView;
-            */
-        }
+            *
+        }*/
     }
 }

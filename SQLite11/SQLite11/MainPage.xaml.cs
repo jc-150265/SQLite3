@@ -128,7 +128,7 @@ namespace SQLite11
                 {
                     Text = sb.ToString(),
                     FontSize = 20,
-                    TextColor = Color.FromHex("82DADA")
+                    TextColor = Color.Red,
                 }
             };
         }

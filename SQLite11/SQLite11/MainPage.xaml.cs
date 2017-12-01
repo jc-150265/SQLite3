@@ -70,7 +70,7 @@ namespace SQLite11
                 Text = "Delete!",
                 TextColor = Color.Red,
             };
-
+            /*
             deleteEntry = new Entry
             {
                 WidthRequest = 60,
@@ -79,6 +79,7 @@ namespace SQLite11
             Delete.Clicked += DeleteClicked;
             layout.Children.Add(deleteEntry);
             deleteId = int.Parse(deleteEntry.Text);
+            */
 
             //--------------------------------selectします------------------------------
             var Select = new Button
@@ -107,7 +108,8 @@ namespace SQLite11
         //deleteイベントハンドラ
         void DeleteClicked(object sender, EventArgs e)
         {
-            UserModel.deleteUser(deleteId);
+            //UserModel.deleteUser(deleteId);
+            UserModel.deleteUser(1);
 
         }
 

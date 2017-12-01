@@ -82,6 +82,7 @@ namespace SQLite11
                 try
                 {
                     db.CreateTable<UserModel>();
+                    db.DropTable<UserModel>();
 
                     db.Delete(id);
                 }

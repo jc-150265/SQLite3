@@ -16,7 +16,7 @@ namespace SQLite11
 
             InitializeComponent();
 
-            MainPage = new SQLite11.MainPage();
+            MainPage = new NavigationPage(new SQLite11.MainPage());
         }
 
         protected override void OnStart()

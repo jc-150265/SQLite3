@@ -21,7 +21,7 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>CFBundleDisplayName</key>
-	<string>SQLite11</string>
+	<string>SQLite</string>
 	<key>CFBundleIdentifier</key>
 	<string>jp.jc21.SQLite11</string>
 	<key>CFBundleVersion</key>

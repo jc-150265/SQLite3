@@ -81,8 +81,6 @@ namespace SQLite11
                 //db.BeginTransaction();  //このサイト https://qiita.com/alzybaad/items/9356b5a651603a548278
                 try
                 {
-                    db.DropTable<UserModel>();
-
                     db.CreateTable<UserModel>();
 
                     db.Delete(id);

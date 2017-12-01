@@ -56,6 +56,7 @@ namespace SQLite11
             };
             layout.Children.Add(Insert);
             Insert.Clicked += InsertClicked;
+            layout.Children.Add(deleteEntry);
             
             //--------------------------------deleteします------------------------------
             var Delete = new Button
@@ -70,6 +71,7 @@ namespace SQLite11
             };
             layout.Children.Add(Delete);
             Delete.Clicked += DeleteClicked;
+            layout.Children.Add(deleteEntry);
             
             //--------------------------------selectします------------------------------
             var Select = new Button
@@ -131,6 +133,7 @@ namespace SQLite11
                     TextColor = Color.Red,
                 }
             };
+            Content = scrollView;
         }
     }
 

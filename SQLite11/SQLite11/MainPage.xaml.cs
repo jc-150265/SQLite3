@@ -8,7 +8,7 @@ namespace SQLite11
     public partial class MainPage : ContentPage
     {
         //http://www.atmarkit.co.jp/ait/articles/1612/28/news021.html　ScrollView
-        
+        /*
         public MainPage()
         {
             InitializeComponent();
@@ -33,8 +33,9 @@ namespace SQLite11
             Content = layout;
 
         }
+        */
 
-        /*
+        
         private Entry insertEntry; //insertの入力フィールド
         private Entry deleteEntry; //deleteの入力フィールド
         private int deleteId; //削除Idフィールド
@@ -61,6 +62,7 @@ namespace SQLite11
             layout.Children.Add(Insert);
             Insert.Clicked += InsertClicked;
             layout.Children.Add(insertEntry);
+            /*
             
             //--------------------------------deleteします------------------------------
             var Delete = new Button
@@ -78,6 +80,7 @@ namespace SQLite11
             Delete.Clicked += DeleteClicked;
             layout.Children.Add(deleteEntry);
             deleteId = int.Parse(deleteEntry.Text);
+            */
 
             //--------------------------------selectします------------------------------
             var Select = new Button
@@ -91,6 +94,7 @@ namespace SQLite11
 
             Content = layout;
         }
+        
 
         //insertイベントハンドラ
         void InsertClicked(object sender, EventArgs e)
@@ -101,47 +105,49 @@ namespace SQLite11
             UserModel.insertUser(InsertName);
 
         }
-
+        
+        /*
         //deleteイベントハンドラ
         void DeleteClicked(object sender, EventArgs e)
         {
             UserModel.deleteUser(deleteId);
 
         }
+        */
+
         //selectイベントハンドラ
         void SelectClicked(object sender, EventArgs e)
-        {
-            
-            //Userテーブルの行データを取得
-            var query = UserModel.selectUser(); //中身はSELECT * FROM [User]
-            var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center, Margin = new Thickness { Top = 100 } };
-            foreach (var user in query)
             {
-                //Userテーブルの名前列をLabelに書き出す
-                layout.Children.Add(new Label { Text = user.Name });
-            }
-            Content = layout;
-            
+
+                //Userテーブルの行データを取得
+                var query = UserModel.selectUser(); //中身はSELECT * FROM [User]
+                var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center, Margin = new Thickness { Top = 100 } };
+                foreach (var user in query)
+                {
+                    //Userテーブルの名前列をLabelに書き出す
+                    layout.Children.Add(new Label { Text = user.Name });
+                }
+                Content = layout;
+
 
             /*
-            var query = UserModel.selectUser(); //中身はSELECT * FROM [User]
-            foreach (var user in query)
-            {
-                var sb = new Label { Text = user.Name };
-            }
-            var scrollView = new ScrollView
-            {
-                VerticalOptions = LayoutOptions.FillAndExpand,
-                //ラベルを配置する
-                Content = new Label
+                var query = UserModel.selectUser(); //中身はSELECT * FROM [User]
+                foreach (var user in query)
                 {
-                    Text = sb.ToString(),
-                    FontSize = 20,
-                    TextColor = Color.Red,
+                    var sb = new Label { Text = user.Name };
                 }
-            };
-            Content = scrollView;
-            *
-        }*/
+                var scrollView = new ScrollView
+                {
+                    VerticalOptions = LayoutOptions.FillAndExpand,
+                    //ラベルを配置する
+                    Content = new Label
+                    {
+                        Text = sb.ToString(),
+                        FontSize = 20,
+                        TextColor = Color.Red,
+                    }
+                };
+                Content = scrollView;*/
+         }
     }
 }

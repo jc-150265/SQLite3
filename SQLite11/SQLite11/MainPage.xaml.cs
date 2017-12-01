@@ -70,14 +70,14 @@ namespace SQLite11
                 Text = "Delete!",
                 TextColor = Color.Red,
             };
+            layout.Children.Add(Delete);
+            Delete.Clicked += DeleteClicked;
             /*
             deleteEntry = new Entry
             {
                 WidthRequest = 60,
             };
-            layout.Children.Add(Delete);
-            Delete.Clicked += DeleteClicked;
-            layout.Children.Add(deleteEntry);
+                        layout.Children.Add(deleteEntry);
             deleteId = int.Parse(deleteEntry.Text);
             */
 

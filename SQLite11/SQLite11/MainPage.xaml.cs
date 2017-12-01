@@ -35,7 +35,9 @@ namespace SQLite11
         }*/
         private Entry insertEntry; //insertの入力フィールド
         private Entry deleteEntry; //deleteの入力フィールド
-        private string sb;
+        private int deleteId; //削除Idフィールド
+
+        private string sb; //スクロールビューで使うかも
 
         public MainPage()
         {
@@ -56,7 +58,7 @@ namespace SQLite11
             };
             layout.Children.Add(Insert);
             Insert.Clicked += InsertClicked;
-            layout.Children.Add(deleteEntry);
+            layout.Children.Add(insertEntry);
             
             //--------------------------------deleteします------------------------------
             var Delete = new Button
@@ -65,10 +67,12 @@ namespace SQLite11
                 Text = "Delete!",
                 TextColor = Color.Red,
             };
+
             deleteEntry = new Entry
             {
                 WidthRequest = 60,
             };
+            deleteId = int.Parse(deleteEntry.Text);
             layout.Children.Add(Delete);
             Delete.Clicked += DeleteClicked;
             layout.Children.Add(deleteEntry);
@@ -90,22 +94,22 @@ namespace SQLite11
         void InsertClicked(object sender, EventArgs e)
         {
             
-            var text = insertEntry.Text;
+            var InsertName = insertEntry.Text;
             //Userテーブルに適当なデータを追加する
-            UserModel.insertUser(text);
+            UserModel.insertUser(InsertName);
 
         }
 
         //deleteメソッド
         void DeleteClicked(object sender, EventArgs e)
         {
-            UserModel.deleteUser(1);
+            UserModel.deleteUser(deleteId);
 
         }
         //selectメソッド
         void SelectClicked(object sender, EventArgs e)
         {
-            /*
+            
             //Userテーブルの行データを取得
             var query = UserModel.selectUser(); //中身はSELECT * FROM [User]
             var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center, Margin = new Thickness { Top = 100 } };
@@ -115,8 +119,9 @@ namespace SQLite11
                 layout.Children.Add(new Label { Text = user.Name });
             }
             Content = layout;
-            */
+            
 
+            /*
             var query = UserModel.selectUser(); //中身はSELECT * FROM [User]
             foreach (var user in query)
             {
@@ -134,6 +139,7 @@ namespace SQLite11
                 }
             };
             Content = scrollView;
+            */
         }
     }
 

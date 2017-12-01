@@ -46,7 +46,7 @@ namespace SQLite11
                 }
             }
         }
-        /*
+        
         //id name オーバーロード
         public static void insertUser(int id, string name)
         {
@@ -58,7 +58,7 @@ namespace SQLite11
                     //データベースにUserテーブルを作成する
                     db.CreateTable<UserModel>();
 
-                    db.Insert(new UserModel() { Name = name, Id = id });
+                    db.Insert(new UserModel() { Id = id , Name = name  });
                     db.Commit();
                 }
                 catch (Exception e)
@@ -68,7 +68,7 @@ namespace SQLite11
                 }
             }
         }
-        */
+        
 
         //Userテーブルのuserを削除するメソッド
         //--------------------------delete文的なの--------------------------

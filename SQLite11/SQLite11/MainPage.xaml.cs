@@ -35,7 +35,7 @@ namespace SQLite11
         }
         */
 
-        
+
         private Entry insertEntry; //insertの入力フィールド
         private Entry deleteEntry; //deleteの入力フィールド
         private int deleteId; //削除Idフィールド
@@ -62,8 +62,7 @@ namespace SQLite11
             layout.Children.Add(Insert);
             Insert.Clicked += InsertClicked;
             layout.Children.Add(insertEntry);
-            /*
-            
+
             //--------------------------------deleteします------------------------------
             var Delete = new Button
             {
@@ -75,12 +74,11 @@ namespace SQLite11
             deleteEntry = new Entry
             {
                 WidthRequest = 60,
-            };            
+            };
             layout.Children.Add(Delete);
             Delete.Clicked += DeleteClicked;
             layout.Children.Add(deleteEntry);
             deleteId = int.Parse(deleteEntry.Text);
-            */
 
             //--------------------------------selectします------------------------------
             var Select = new Button
@@ -94,40 +92,38 @@ namespace SQLite11
 
             Content = layout;
         }
-        
+
 
         //insertイベントハンドラ
         void InsertClicked(object sender, EventArgs e)
         {
-            
+
             var InsertName = insertEntry.Text;
             //Userテーブルに適当なデータを追加する
             UserModel.insertUser(InsertName);
 
         }
-        
-        /*
+
         //deleteイベントハンドラ
         void DeleteClicked(object sender, EventArgs e)
         {
             UserModel.deleteUser(deleteId);
 
         }
-        */
 
         //selectイベントハンドラ
         void SelectClicked(object sender, EventArgs e)
-            {
+        {
 
-                //Userテーブルの行データを取得
-                var query = UserModel.selectUser(); //中身はSELECT * FROM [User]
-                var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center, Margin = new Thickness { Top = 100 } };
-                foreach (var user in query)
-                {
-                    //Userテーブルの名前列をLabelに書き出す
-                    layout.Children.Add(new Label { Text = user.Name });
-                }
-                Content = layout;
+            //Userテーブルの行データを取得
+            var query = UserModel.selectUser(); //中身はSELECT * FROM [User]
+            var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center, Margin = new Thickness { Top = 100 } };
+            foreach (var user in query)
+            {
+                //Userテーブルの名前列をLabelに書き出す
+                layout.Children.Add(new Label { Text = user.Name });
+            }
+            Content = layout;
 
 
             /*
@@ -148,6 +144,6 @@ namespace SQLite11
                     }
                 };
                 Content = scrollView;*/
-         }
+        }
     }
 }

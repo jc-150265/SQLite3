@@ -106,7 +106,7 @@ namespace SQLite11
                 try
                 {
                     //データベースに指定したSQLを発行します
-                    return db.Query<UserModel>("SELECT * FROM [User]");
+                    return db.Query<UserModel>("SELECT * FROM [User] limit 30");
 
                 }
                 catch (Exception e)

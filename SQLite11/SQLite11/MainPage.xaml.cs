@@ -37,8 +37,11 @@ namespace SQLite11
 
 
         private Entry insertEntry; //insertの入力フィールド
-        private Entry deleteEntry; //deleteの入力フィールド
+
+        private Entry deleteEntry; //deleteの入力フィールド まだ削除できない
         private int deleteId; //削除Idフィールド
+
+        private static int id = 0; //Idを足していく
 
         private string sb; //スクロールビューで使うかも
 
@@ -47,6 +50,15 @@ namespace SQLite11
             InitializeComponent();
 
             var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center, Margin = new Thickness { Top = 100 } };
+
+
+            //Userテーブルの行データを取得
+            var query = UserModel.selectUser(); //中身はSELECT * FROM [User]            
+            foreach (var user in query)
+            {
+                //Userテーブルの名前列をLabelに書き出す
+                layout.Children.Add(new Label { Text = user.Name });
+            }
 
             //-------------------------------insertします-------------------------------
             var Insert = new Button
@@ -64,7 +76,7 @@ namespace SQLite11
             layout.Children.Add(insertEntry);
 
             //--------------------------------deleteします------------------------------
-            var Delete = new Button
+            var Delete = new Button     //dropしてるだけ
             {
                 WidthRequest = 60,
                 Text = "Delete!",
@@ -99,9 +111,11 @@ namespace SQLite11
         void InsertClicked(object sender, EventArgs e)
         {
 
+            id++;
+            
             var InsertName = insertEntry.Text;
             //Userテーブルに適当なデータを追加する
-            UserModel.insertUser(InsertName);
+            UserModel.insertUser(id,InsertName);
 
         }
 

@@ -132,10 +132,12 @@ namespace SQLite11
     {
         //プライマリキー　自動採番されます
         [PrimaryKey, AutoIncrement, Column("_id")]
+        //カラムっていうのは列と同じ
         //idカラム
         public int Id { get; set; }
         //名前カラム
         public string Name { get; set; }
+
         public string a { get; set; }
 
         //Userテーブルに行追加するメソッドです

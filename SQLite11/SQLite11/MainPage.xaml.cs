@@ -131,6 +131,7 @@ namespace SQLite11
         //selectイベントハンドラ
         void SelectClicked(object sender, EventArgs e)
         {
+            var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center, Margin = new Thickness { Top = 100 } };
             //selectする
             var Select = new Button
             {

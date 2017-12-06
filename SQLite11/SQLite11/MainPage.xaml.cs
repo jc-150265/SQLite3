@@ -50,16 +50,7 @@ namespace SQLite11
             InitializeComponent();
 
             var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center, Margin = new Thickness { Top = 100 } };
-
-
-            //Userテーブルの行データを取得
-            var query = UserModel.selectUser(); //中身はSELECT * FROM [User]            
-            foreach (var user in query)
-            {
-                //Userテーブルの名前列をLabelに書き出す
-                layout.Children.Add(new Label { Text = user.Name });
-            }
-
+                        
             //-------------------------------insertします-------------------------------
             var Insert = new Button
             {

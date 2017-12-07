@@ -43,6 +43,8 @@ namespace SQLite11
 
         private string sb; //スクロールビューで使うかも
 
+        private int id = 0;
+
         public MainPage()
         {
             InitializeComponent();
@@ -65,7 +67,7 @@ namespace SQLite11
             layout.Children.Add(insertEntry);
 
             //--------------------------------deleteします------------------------------
-            var Delete = new Button     //dropしてるだけ
+            var Delete = new Button     //まだdropしてるだけ
             {
                 WidthRequest = 60,
                 Text = "Delete!",
@@ -119,7 +121,7 @@ namespace SQLite11
         {
             var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center, Margin = new Thickness { Top = 100 } };
 
-            //selectする
+            //selectボタン
             var Select = new Button
             {
                 WidthRequest = 60,
@@ -128,7 +130,7 @@ namespace SQLite11
             };
             layout.Children.Add(Select);
             Select.Clicked += SelectClicked;
-            //insertする
+            //insertボタン
             var Insert = new Button
             {
                 WidthRequest = 60,

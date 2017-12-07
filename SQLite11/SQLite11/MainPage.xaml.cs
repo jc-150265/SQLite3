@@ -152,6 +152,16 @@ namespace SQLite11
             {
                 //Userテーブルの名前列をLabelに書き出します
                 layout.Children.Add(new Label { Text = user.Name });
+
+                /*if(user.Equals(null)){
+                    layout.Children.Add();
+                }
+                else
+                {
+                    //Userテーブルの名前列をLabelに書き出します
+                    layout.Children.Add(new Label { Text = user.Name });
+                }*/
+
             }
 
             Content = layout;

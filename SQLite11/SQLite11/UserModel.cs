@@ -12,7 +12,8 @@ namespace SQLite11
     public class UserModel
     {
         //プライマリキー　自動採番されます
-        [PrimaryKey, AutoIncrement, Column("_id")]
+        //[PrimaryKey, AutoIncrement, Column("_id")]
+        [PrimaryKey, AutoIncrement]
         //idカラム
         public int Id { get; set; }
         //名前カラム
@@ -61,8 +62,8 @@ namespace SQLite11
                 {
                     //データベースにUserテーブルを作成する
                     db.CreateTable<UserModel>();
-
-                    db.Insert(new UserModel() { Id = id , Name = name  });
+                    var u = new UserModel() { Id = id, Name = name };
+                    db.Insert(u);
                     db.Commit();
                 }
                 catch (Exception e)
@@ -110,8 +111,8 @@ namespace SQLite11
                 try
                 {
                     //データベースに指定したSQLを発行します
-                    return db.Query<UserModel>("SELECT * FROM [User] order by [Id] desc");
-                                                                            //limit 15
+                    return db.Query<UserModel>("SELECT * FROM [User] order by [Id] desc limit 15");
+                    //return db.Query<UserModel>("SELECT * FROM [User] limit 15");
 
                 }
                 catch (Exception e)

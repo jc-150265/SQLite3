@@ -193,30 +193,7 @@ namespace SQLite11
                 }
             }
         }
-
-        //id name オーバーロード
-        public static void insertUser(int id, string name, string a)
-        {
-            //データベースに接続する
-            using (SQLiteConnection db = new SQLiteConnection(App.dbPath))
-            {
-                try
-                {
-                    //データベースにUserテーブルを作成する
-                    db.CreateTable<UserModel>();
-
-                    db.Insert(new UserModel() { Id = id, Name = name, a = a });
-                    db.Commit();
-                }
-                catch (Exception e)
-                {
-                    db.Rollback();
-                    System.Diagnostics.Debug.WriteLine(e);
-                }
-            }
-        }
-
-
+        
         //Userテーブルのuserを削除するメソッド
         //--------------------------delete文的なの--------------------------
         public static void deleteUser(int id)
@@ -253,7 +230,7 @@ namespace SQLite11
                 try
                 {
                     //データベースに指定したSQLを発行します
-                    return db.Query<UserModel>("SELECT * FROM [Book] limit 15");
+                    return db.Query<UserModel>("SELECT * FROM [Book] order by [Id] desc limit 15");
 
                 }
                 catch (Exception e)

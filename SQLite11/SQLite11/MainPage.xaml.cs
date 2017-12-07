@@ -41,8 +41,6 @@ namespace SQLite11
         private Entry deleteEntry; //deleteの入力フィールド まだ削除できない
         private int deleteId; //削除Idフィールド
 
-        private static int id = 0; //Idを足していく
-
         private string sb; //スクロールビューで使うかも
 
         public MainPage()
@@ -101,12 +99,9 @@ namespace SQLite11
         //insertイベントハンドラ
         void InsertClicked(object sender, EventArgs e)
         {
-
-            id++;
-            
             var InsertName = insertEntry.Text;
             //Userテーブルに適当なデータを追加する
-            UserModel.insertUser(InsertName);
+            UserModel.insertUser(1,InsertName);
             //UserModel.insertUser(id,InsertName);
 
         }
@@ -123,6 +118,7 @@ namespace SQLite11
         void SelectClicked(object sender, EventArgs e)
         {
             var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center, Margin = new Thickness { Top = 100 } };
+
             //selectする
             var Select = new Button
             {
@@ -147,6 +143,15 @@ namespace SQLite11
             Insert.Clicked += InsertClicked;
             layout.Children.Add(insertEntry);
 
+            //Userテーブルの行データを取得
+            var query = UserModel.selectUser();
+
+            foreach (var user in query)
+            {
+                //Userテーブルの名前列をLabelに書き出します
+                layout.Children.Add(new Label { Text = user.Name });
+            }
+
             Content = layout;
 
 
@@ -167,7 +172,8 @@ namespace SQLite11
                         TextColor = Color.Red,
                     }
                 };
-                Content = scrollView;*/
+                Content = scrollView;
+            */
         }
     }
 }

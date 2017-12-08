@@ -37,17 +37,20 @@ namespace SQLite11
 
 
         private Entry insertEntry; //insertの入力フィールド
-        private Entry deleteEntry; //deleteの入力フィールド
+
+        private Entry deleteEntry; //deleteの入力フィールド まだ削除できない
         private int deleteId; //削除Idフィールド
 
         private string sb; //スクロールビューで使うかも
+
+        private int id = 0;
 
         public MainPage()
         {
             InitializeComponent();
 
             var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center, Margin = new Thickness { Top = 100 } };
-
+                        
             //-------------------------------insertします-------------------------------
             var Insert = new Button
             {
@@ -64,7 +67,7 @@ namespace SQLite11
             layout.Children.Add(insertEntry);
 
             //--------------------------------deleteします------------------------------
-            var Delete = new Button
+            var Delete = new Button     //まだdropしてるだけ
             {
                 WidthRequest = 60,
                 Text = "Delete!",
@@ -98,10 +101,10 @@ namespace SQLite11
         //insertイベントハンドラ
         void InsertClicked(object sender, EventArgs e)
         {
-
             var InsertName = insertEntry.Text;
             //Userテーブルに適当なデータを追加する
-            UserModel.insertUser(InsertName);
+            UserModel.insertUser(1,InsertName);
+            //UserModel.insertUser(id,InsertName);
 
         }
 
@@ -116,16 +119,9 @@ namespace SQLite11
         //selectイベントハンドラ
         void SelectClicked(object sender, EventArgs e)
         {
-
-            //Userテーブルの行データを取得
-            var query = UserModel.selectUser(); //中身はSELECT * FROM [User]
             var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center, Margin = new Thickness { Top = 100 } };
-            foreach (var user in query)
-            {
-                //Userテーブルの名前列をLabelに書き出す
-                layout.Children.Add(new Label { Text = user.Name });
-            }
-            //selectする
+
+            //selectボタン
             var Select = new Button
             {
                 WidthRequest = 60,
@@ -134,7 +130,7 @@ namespace SQLite11
             };
             layout.Children.Add(Select);
             Select.Clicked += SelectClicked;
-            //insertする
+            //insertボタン
             var Insert = new Button
             {
                 WidthRequest = 60,
@@ -148,6 +144,25 @@ namespace SQLite11
             layout.Children.Add(Insert);
             Insert.Clicked += InsertClicked;
             layout.Children.Add(insertEntry);
+
+            //Userテーブルの行データを取得
+            var query = UserModel.selectUser();
+
+            foreach (var user in query)
+            {
+                //Userテーブルの名前列をLabelに書き出します
+                layout.Children.Add(new Label { Text = user.Name });
+
+                /*if(user.Equals(null)){
+                    layout.Children.Add();
+                }
+                else
+                {
+                    //Userテーブルの名前列をLabelに書き出します
+                    layout.Children.Add(new Label { Text = user.Name });
+                }*/
+
+            }
 
             Content = layout;
 
@@ -169,7 +184,8 @@ namespace SQLite11
                         TextColor = Color.Red,
                     }
                 };
-                Content = scrollView;*/
+                Content = scrollView;
+            */
         }
     }
 }

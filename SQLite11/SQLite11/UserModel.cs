@@ -12,14 +12,13 @@ namespace SQLite11
     public class UserModel
     {
         //プライマリキー　自動採番されます
-        //[PrimaryKey, AutoIncrement, Column("_id")]
-        [PrimaryKey, AutoIncrement]
+        [PrimaryKey, AutoIncrement, Column("_id")]
+        //[PrimaryKey, AutoIncrement]
+        //↓カラムは列と同じ
         //idカラム
         public int Id { get; set; }
         //名前カラム
         public string Name { get; set; }
-
-        public int id;
 
         //Userテーブルに行追加するメソッドです
             //------------------------Insert文的なの--------------------------
@@ -62,8 +61,8 @@ namespace SQLite11
                 {
                     //データベースにUserテーブルを作成する
                     db.CreateTable<UserModel>();
-                    var u = new UserModel() { Id = id, Name = name };
-                    db.Insert(u);
+
+                    db.Insert(new UserModel() { Id = id, Name = name });
                     db.Commit();
                 }
                 catch (Exception e)
@@ -73,23 +72,26 @@ namespace SQLite11
                 }
             }
         }
-        
+
 
         //Userテーブルのuserを削除するメソッド
+        //削除メソッド参考サイト https://qiita.com/alzybaad/items/9356b5a651603a548278
         //--------------------------delete文的なの--------------------------
         public static void deleteUser(int id)
         {
 
             //データベースに接続
             using (SQLiteConnection db = new SQLiteConnection(App.dbPath))
-            {
-                //db.BeginTransaction();  //このサイト https://qiita.com/alzybaad/items/9356b5a651603a548278
+            {                
                 try
                 {
+                    //データベースにUserテーブルを作成する
                     db.CreateTable<UserModel>();
-                    db.DropTable<UserModel>();
 
-                    db.Delete(id);
+                    //db.DropTable<UserModel>(); 怒りのドロップテーブル！
+
+                    db.Delete<UserModel>(id);
+                    db.Commit();
                 }
                 catch (Exception e)
                 {
@@ -110,9 +112,12 @@ namespace SQLite11
 
                 try
                 {
-                    //データベースに指定したSQLを発行します
-                    return db.Query<UserModel>("SELECT * FROM [User] order by Id desc limit 15");
+                    //db.DropTable<UserModel>(); //怒りのドロップテーブル！
 
+                    //データベースに指定したSQLを発行します
+                    //return db.Query<UserModel>("SELECT * FROM [User] order by Id desc limit 15");                    
+                    return db.Query<UserModel>("SELECT * FROM [User] limit 15");
+                    
                 }
                 catch (Exception e)
                 {

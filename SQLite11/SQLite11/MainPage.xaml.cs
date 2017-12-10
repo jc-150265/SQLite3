@@ -57,7 +57,9 @@ namespace SQLite11
             };
             insertEntry = new Entry
             {
-                WidthRequest = 60
+                Placeholder = "Insert",
+                PlaceholderColor = Color.Gray,
+                WidthRequest = 130
             };
             layout.Children.Add(Insert);
             Insert.Clicked += InsertClicked;
@@ -72,7 +74,9 @@ namespace SQLite11
             };
             deleteEntry = new Entry
             {
-                WidthRequest = 60,
+                Placeholder = "Delete",
+                PlaceholderColor = Color.Gray,
+                WidthRequest = 130
             };
             layout.Children.Add(Delete);
             Delete.Clicked += DeleteClicked;
@@ -130,20 +134,6 @@ namespace SQLite11
             };
             layout.Children.Add(Select);
             Select.Clicked += SelectClicked;
-            //deleteボタン
-            var Delete = new Button
-            {
-                WidthRequest = 60,
-                Text = "Delete!",
-                TextColor = Color.Red,
-            };
-            deleteEntry = new Entry
-            {
-                WidthRequest = 60,
-            };
-            layout.Children.Add(Delete);
-            Delete.Clicked += DeleteClicked;
-            layout.Children.Add(deleteEntry);
             //insertボタン
             var Insert = new Button
             {
@@ -153,12 +143,30 @@ namespace SQLite11
             };
             insertEntry = new Entry
             {
-                WidthRequest = 60
+                Placeholder = "Insert",
+                PlaceholderColor = Color.Gray,
+                WidthRequest = 130
             };
             layout.Children.Add(Insert);
             Insert.Clicked += InsertClicked;
             layout.Children.Add(insertEntry);
-
+            //deleteボタン
+            var Delete = new Button
+            {
+                WidthRequest = 60,
+                Text = "Delete!",
+                TextColor = Color.Red,
+            };
+            deleteEntry = new Entry
+            {
+                Placeholder = "Delete",
+                PlaceholderColor = Color.Gray,
+                WidthRequest = 130
+            };
+            layout.Children.Add(Delete);
+            Delete.Clicked += DeleteClicked;
+            layout.Children.Add(deleteEntry);
+            
             //Userテーブルの行データを取得
             if (UserModel.selectUser() != null)
             {
@@ -170,6 +178,10 @@ namespace SQLite11
                     layout.Children.Add(new Label { Text = user.Id.ToString() });
                     layout.Children.Add(new Label { Text = user.Name });
                 }
+            }
+            else
+            {
+                DisplayAlert("表がありません", "値をInsertしてください", "OK");
             }
             Content = layout;
         }

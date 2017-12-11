@@ -48,6 +48,16 @@ namespace SQLite11
 
             var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center, Margin = new Thickness { Top = 100 } };
 
+            //--------------------------------selectします------------------------------
+            var Select = new Button
+            {
+                WidthRequest = 60,
+                Text = "Select!",
+                TextColor = Color.Red,
+            };
+            layout.Children.Add(Select);
+            Select.Clicked += SelectClicked;
+
             //-------------------------------insertします-------------------------------
             var Insert = new Button
             {
@@ -81,17 +91,7 @@ namespace SQLite11
             layout.Children.Add(Delete);
             Delete.Clicked += DeleteClicked;
             layout.Children.Add(deleteEntry);
-
-            //--------------------------------selectします------------------------------
-            var Select = new Button
-            {
-                WidthRequest = 60,
-                Text = "Select!",
-                TextColor = Color.Red,
-            };
-            layout.Children.Add(Select);
-            Select.Clicked += SelectClicked;
-
+            
             Content = layout;
         }
 

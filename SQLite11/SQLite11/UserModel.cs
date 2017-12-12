@@ -102,7 +102,7 @@ namespace SQLite11
 
         }
 
-
+        /*
         //Userテーブルの行データを取得します
         //--------------------------select文的なの--------------------------
         public static List<UserModel> selectUser()
@@ -124,6 +124,57 @@ namespace SQLite11
                 {
                     System.Diagnostics.Debug.WriteLine(e);
                     
+                    return null;
+                }
+            }
+        }
+        */
+
+        //Userテーブルの行データを取得します
+        //--------------------------select文的なの--------------------------
+        public static List<UserModel> selectUser()
+        {
+            using (SQLiteConnection db = new SQLiteConnection(App.dbPath))
+            {
+
+                try
+                {
+                    //db.DropTable<UserModel>(); //怒りのドロップテーブル！
+
+                    //データベースに指定したSQLを発行します
+
+                    return db.Query<UserModel>("SELECT * FROM [User] where [Name] LIKE '%あ%' limit 15");
+                    //return db.Query<UserModel>("SELECT * FROM [User]　ORDER BY [Name] DESC LIMIT 15");
+                    //return db.Query<UserModel>("SELECT * FROM [User] limit 15");
+                } //no such column: Id
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e);
+
+                    return null;
+                }
+            }
+        }
+
+        public static List<UserModel> selectUser(string name)
+        {
+            using (SQLiteConnection db = new SQLiteConnection(App.dbPath))
+            {
+
+                try
+                {
+                    //db.DropTable<UserModel>(); //怒りのドロップテーブル！
+
+                    //データベースに指定したSQLを発行します
+
+                    return db.Query<UserModel>("SELECT * FROM [User] where [Name] LIKE '%" + name + "%' limit 15");
+                    //return db.Query<UserModel>("SELECT * FROM [User]　ORDER BY [Name] DESC LIMIT 15");
+                    //return db.Query<UserModel>("SELECT * FROM [User] limit 15");
+                } //no such column: Id
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e);
+
                     return null;
                 }
             }

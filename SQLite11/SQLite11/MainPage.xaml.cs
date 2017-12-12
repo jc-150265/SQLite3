@@ -40,6 +40,8 @@ namespace SQLite11
 
         private Entry deleteEntry; //deleteの入力フィールド まだ削除できない
 
+        private Entry selectEntry;
+
         private string sb; //スクロールビューで使うかも
 
         public MainPage()
@@ -57,6 +59,15 @@ namespace SQLite11
             };
             layout.Children.Add(Select);
             Select.Clicked += SelectClicked;
+
+
+            selectEntry = new Entry
+            {
+                Placeholder = "Delete",
+                PlaceholderColor = Color.Gray,
+                WidthRequest = 130
+            };
+            layout.Children.Add(selectEntry);
 
             //-------------------------------insertします-------------------------------
             var Insert = new Button
@@ -166,11 +177,14 @@ namespace SQLite11
             layout.Children.Add(Delete);
             Delete.Clicked += DeleteClicked;
             layout.Children.Add(deleteEntry);
-            
+
             //Userテーブルの行データを取得
-            if (UserModel.selectUser() != null)
+
+            string x = selectEntry.Text;
+
+            if (UserModel.selectUser(x) != null)
             {
-                var query = UserModel.selectUser(); //中身はSELECT * FROM [User] limit 15
+                var query = UserModel.selectUser(x); //中身はSELECT * FROM [User] limit 15
 
                 foreach (var user in query)
                 {
@@ -181,7 +195,7 @@ namespace SQLite11
             }
             else
             {
-                DisplayAlert("表がありません", "値をInsertしてください", "OK");
+                DisplayAlert("表がないエラー", "表がないよー", "OK");
             }
             Content = layout;
         }

@@ -115,14 +115,15 @@ namespace SQLite11
                     //db.DropTable<UserModel>(); //怒りのドロップテーブル！
 
                     //データベースに指定したSQLを発行します
-                    //return db.Query<UserModel>("SELECT * FROM [User] order by Id desc limit 15");                    
-                    return db.Query<UserModel>("SELECT * FROM [User]　order by [Name] desc limit 15");
-                    
-                }
+
+                    return db.Query<UserModel>("SELECT * FROM [User] where [Name] LIKE '%あ%' limit 15");                    
+                    //return db.Query<UserModel>("SELECT * FROM [User]　ORDER BY [Name] DESC LIMIT 15");
+                    //return db.Query<UserModel>("SELECT * FROM [User] limit 15");
+                } //no such column: Id
                 catch (Exception e)
                 {
-
                     System.Diagnostics.Debug.WriteLine(e);
+                    
                     return null;
                 }
             }

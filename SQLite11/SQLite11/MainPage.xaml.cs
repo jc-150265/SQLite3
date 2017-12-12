@@ -46,7 +46,7 @@ namespace SQLite11
         {
             InitializeComponent();
 
-            var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center, Margin = new Thickness { Top = 100 } };
+            var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center, Margin = new Thickness { Top = 30 } };
 
             //--------------------------------selectします------------------------------
             var Select = new Button
@@ -123,7 +123,7 @@ namespace SQLite11
         //selectイベントハンドラ
         void SelectClicked(object sender, EventArgs e)
         {
-            var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center, Margin = new Thickness { Top = 100 } };
+            var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center, Margin = new Thickness { Top = 30 } };
 
             //selectボタン
             var Select = new Button

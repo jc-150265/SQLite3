@@ -143,7 +143,7 @@ namespace SQLite11
 
                     //データベースに指定したSQLを発行します
 
-                    return db.Query<UserModel>("SELECT * FROM [User] where [Name] LIKE '%あ%' limit 15");
+                    return db.Query<UserModel>("SELECT * FROM [User] limit 15");
                     //return db.Query<UserModel>("SELECT * FROM [User]　ORDER BY [Name] DESC LIMIT 15");
                     //return db.Query<UserModel>("SELECT * FROM [User] limit 15");
                 } //no such column: Id
@@ -156,7 +156,8 @@ namespace SQLite11
             }
         }
 
-        public static List<UserModel> selectUser(string name)
+        //オーバーロード 文字入力があったらその文字を検索
+        public static List<UserModel> selectUser(string x)
         {
             using (SQLiteConnection db = new SQLiteConnection(App.dbPath))
             {
@@ -167,7 +168,7 @@ namespace SQLite11
 
                     //データベースに指定したSQLを発行します
 
-                    return db.Query<UserModel>("SELECT * FROM [User] where [Name] LIKE '%" + name + "%' limit 15");
+                    return db.Query<UserModel>("SELECT * FROM [User] where [Name] LIKE '%" + x + "%' limit 15");
                     //return db.Query<UserModel>("SELECT * FROM [User]　ORDER BY [Name] DESC LIMIT 15");
                     //return db.Query<UserModel>("SELECT * FROM [User] limit 15");
                 } //no such column: Id

@@ -36,11 +36,11 @@ namespace SQLite11
         */
 
 
-        private Entry insertEntry; //insertの入力フィールド
+        private Entry insertEntry; //insertの入力フィールド 入力した値をinsert
 
-        private Entry deleteEntry; //deleteの入力フィールド まだ削除できない
+        private Entry deleteEntry; //deleteの入力フィールド 入力した値でdelete
 
-        private Entry selectEntry;
+        private Entry selectEntry; //selectの入力フィールド 入力した値で検索(where)
 
         private string sb; //スクロールビューで使うかも
 
@@ -48,7 +48,7 @@ namespace SQLite11
         {
             InitializeComponent();
 
-            var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center, Margin = new Thickness { Top = 30 } };
+            var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center, Margin = new Thickness { Top = 10 } };
 
             //--------------------------------selectします------------------------------
             var Select = new Button
@@ -57,16 +57,14 @@ namespace SQLite11
                 Text = "Select!",
                 TextColor = Color.Red,
             };
-            layout.Children.Add(Select);
-            Select.Clicked += SelectClicked;
-
-
             selectEntry = new Entry
             {
-                Placeholder = "Delete",
+                Placeholder = "Select",
                 PlaceholderColor = Color.Gray,
                 WidthRequest = 130
             };
+            layout.Children.Add(Select);
+            Select.Clicked += SelectClicked;
             layout.Children.Add(selectEntry);
 
             //-------------------------------insertします-------------------------------
@@ -102,7 +100,7 @@ namespace SQLite11
             layout.Children.Add(Delete);
             Delete.Clicked += DeleteClicked;
             layout.Children.Add(deleteEntry);
-            
+
             Content = layout;
         }
 
@@ -134,8 +132,15 @@ namespace SQLite11
         //selectイベントハンドラ
         void SelectClicked(object sender, EventArgs e)
         {
-            var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center, Margin = new Thickness { Top = 30 } };
 
+            //Userテーブルの行データを取得
+            String x = selectEntry.Text;
+
+            //DisplayAlert("", selectEntry.Text, "");
+
+            var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center, Margin = new Thickness { Top = 10 } };
+
+            //--------------------ボタン再配置--------------------------
             //selectボタン
             var Select = new Button
             {
@@ -143,8 +148,15 @@ namespace SQLite11
                 Text = "Select!",
                 TextColor = Color.Red,
             };
+            selectEntry = new Entry
+            {
+                Placeholder = "Select",
+                PlaceholderColor = Color.Gray,
+                WidthRequest = 130
+            };
             layout.Children.Add(Select);
             Select.Clicked += SelectClicked;
+            layout.Children.Add(selectEntry);
             //insertボタン
             var Insert = new Button
             {
@@ -177,14 +189,29 @@ namespace SQLite11
             layout.Children.Add(Delete);
             Delete.Clicked += DeleteClicked;
             layout.Children.Add(deleteEntry);
-
-            //Userテーブルの行データを取得
-
-            string x = selectEntry.Text;
-
-            if (UserModel.selectUser(x) != null)
+            //--------------------ボタン再配置--------------------------
+                        
+            if (x != null) //selectEntryが入力されてたら検索
             {
-                var query = UserModel.selectUser(x); //中身はSELECT * FROM [User] limit 15
+                if (UserModel.selectUser(x) != null)
+                {
+                    var query = UserModel.selectUser(x); //中身はSELECT * FROM [User] where [Name] like "%x%" limit 15
+
+                    foreach (var user in query)
+                    {
+                        //Userテーブルの名前列をLabelに書き出します
+                        layout.Children.Add(new Label { Text = user.Id.ToString() });
+                        layout.Children.Add(new Label { Text = user.Name });
+                    }
+                }
+                else
+                {
+                    DisplayAlert("表がないエラー", "表がないよー", "OK");
+                }
+            }
+            else if (UserModel.selectUser() != null)
+            {
+                var query = UserModel.selectUser(); //中身はSELECT * FROM [User] limit 15
 
                 foreach (var user in query)
                 {
@@ -197,6 +224,7 @@ namespace SQLite11
             {
                 DisplayAlert("表がないエラー", "表がないよー", "OK");
             }
+
             Content = layout;
         }
     }

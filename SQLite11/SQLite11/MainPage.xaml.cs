@@ -40,15 +40,15 @@ namespace SQLite11
 
         private Entry deleteEntry; //deleteの入力フィールド 入力した値でdelete
 
-        private Entry selectEntry; //selectの入力フィールド 入力した値で検索(where)
+        private Entry selectEntry; //selectの入力フィールド 入力した値で検索(where LIKE %?%)
 
-        private string sb; //スクロールビューで使うかも
+        private int a = 0; //自動で値が増えるNo列
 
         public MainPage()
         {
             InitializeComponent();
 
-            var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center, Margin = new Thickness { Top = 10 } };
+            var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center};
 
             //--------------------------------selectします------------------------------
             var Select = new Button
@@ -76,6 +76,7 @@ namespace SQLite11
             };
             insertEntry = new Entry
             {
+                HorizontalOptions = LayoutOptions.FillAndExpand,
                 Placeholder = "Insert",
                 PlaceholderColor = Color.Gray,
                 WidthRequest = 130
@@ -109,8 +110,9 @@ namespace SQLite11
         void InsertClicked(object sender, EventArgs e)
         {
             var InsertName = insertEntry.Text;
+            a += 1;
             //Userテーブルに適当なデータを追加する
-            UserModel.insertUser(1, InsertName);
+            UserModel.insertUser(1, InsertName,a);
         }
 
         //deleteイベントハンドラ
@@ -134,11 +136,10 @@ namespace SQLite11
         {
 
             //Userテーブルの行データを取得
-            String x = selectEntry.Text;
 
-            //DisplayAlert("", selectEntry.Text, "");
+            String x = selectEntry.Text; //入力された文字を習得
 
-            var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center, Margin = new Thickness { Top = 10 } };
+            var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center};
 
             //--------------------ボタン再配置--------------------------
             //selectボタン
@@ -191,11 +192,11 @@ namespace SQLite11
             layout.Children.Add(deleteEntry);
             //--------------------ボタン再配置--------------------------
                         
-            if (x != null) //selectEntryが入力されてたら検索
+            if (x != null) //selectEntryが入力されてたら検索 nullなら全部表示
             {
                 if (UserModel.selectUser(x) != null)
                 {
-                    var query = UserModel.selectUser(x); //中身はSELECT * FROM [User] where [Name] like "%x%" limit 15
+                    var query = UserModel.selectUser(x); //中身はSELECT * FROM [User] where [Name] like "% x %" limit 15
 
                     foreach (var user in query)
                     {

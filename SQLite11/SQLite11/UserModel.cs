@@ -11,17 +11,19 @@ namespace SQLite11
     [Table("User")]
     public class UserModel
     {
-        //プライマリキー　自動採番されます
-        [PrimaryKey, AutoIncrement, Column("_id")]
-        //[PrimaryKey, AutoIncrement]
-        //↓カラムは列と同じ
-        //idカラム
+        //プライマリキー,自動で増える値
+        [PrimaryKey, AutoIncrement]
+        //id列
         public int Id { get; set; }
-        //名前カラム
+
+        //名前列
         public string Name { get; set; }
 
+        //No列
+        public int No { get; set; }
+
         //Userテーブルに行追加するメソッドです
-            //------------------------Insert文的なの--------------------------
+            //------------------------Insertメソッド--------------------------
         public static void insertUser(string name)
         {
             //データベースに接続
@@ -73,10 +75,32 @@ namespace SQLite11
             }
         }
 
+        //id name no オーバーロード
+        public static void insertUser(int id, string name,int no)
+        {
+            //データベースに接続する
+            using (SQLiteConnection db = new SQLiteConnection(App.dbPath))
+            {
+                try
+                {
+                    //データベースにUserテーブルを作成する
+                    db.CreateTable<UserModel>();
+
+                    db.Insert(new UserModel() { Id = id, Name = name, No = no });
+                    db.Commit();
+                }
+                catch (Exception e)
+                {
+                    db.Rollback();
+                    System.Diagnostics.Debug.WriteLine(e);
+                }
+            }
+        }
+
 
         //Userテーブルのuserを削除するメソッド
         //削除メソッド参考サイト https://qiita.com/alzybaad/items/9356b5a651603a548278
-        //--------------------------delete文的なの--------------------------
+        //--------------------------deleteメソッド--------------------------
         public static void deleteUser(int id)
         {
 
@@ -101,8 +125,7 @@ namespace SQLite11
             }
 
         }
-
-        /*
+        
         //Userテーブルの行データを取得します
         //--------------------------select文的なの--------------------------
         public static List<UserModel> selectUser()
@@ -115,38 +138,9 @@ namespace SQLite11
                     //db.DropTable<UserModel>(); //怒りのドロップテーブル！
 
                     //データベースに指定したSQLを発行します
-
-                    return db.Query<UserModel>("SELECT * FROM [User] where [Name] LIKE '%あ%' limit 15");                    
-                    //return db.Query<UserModel>("SELECT * FROM [User]　ORDER BY [Name] DESC LIMIT 15");
-                    //return db.Query<UserModel>("SELECT * FROM [User] limit 15");
-                } //no such column: Id
-                catch (Exception e)
-                {
-                    System.Diagnostics.Debug.WriteLine(e);
-                    
-                    return null;
+                    return db.Query<UserModel>("SELECT * FROM [User] ORDER BY [No] DESC LIMIT 15");   //主キーでORDER BYできないっぽい
+                    //return db.Query<UserModel>("SELECT * FROM [User] limit 15");                    
                 }
-            }
-        }
-        */
-
-        //Userテーブルの行データを取得します
-        //--------------------------select文的なの--------------------------
-        public static List<UserModel> selectUser()
-        {
-            using (SQLiteConnection db = new SQLiteConnection(App.dbPath))
-            {
-
-                try
-                {
-                    //db.DropTable<UserModel>(); //怒りのドロップテーブル！
-
-                    //データベースに指定したSQLを発行します
-
-                    return db.Query<UserModel>("SELECT * FROM [User] limit 15");
-                    //return db.Query<UserModel>("SELECT * FROM [User]　ORDER BY [Name] DESC LIMIT 15");
-                    //return db.Query<UserModel>("SELECT * FROM [User] limit 15");
-                } //no such column: Id
                 catch (Exception e)
                 {
                     System.Diagnostics.Debug.WriteLine(e);
@@ -157,7 +151,7 @@ namespace SQLite11
         }
 
         //オーバーロード 文字入力があったらその文字を検索
-        public static List<UserModel> selectUser(string x)
+        public static List<UserModel> selectUser(string search)
         {
             using (SQLiteConnection db = new SQLiteConnection(App.dbPath))
             {
@@ -168,10 +162,8 @@ namespace SQLite11
 
                     //データベースに指定したSQLを発行します
 
-                    return db.Query<UserModel>("SELECT * FROM [User] where [Name] LIKE '%" + x + "%' limit 15");
-                    //return db.Query<UserModel>("SELECT * FROM [User]　ORDER BY [Name] DESC LIMIT 15");
-                    //return db.Query<UserModel>("SELECT * FROM [User] limit 15");
-                } //no such column: Id
+                    return db.Query<UserModel>("SELECT * FROM [User] where [Name] LIKE '%" + search + "%' limit 15");
+                }
                 catch (Exception e)
                 {
                     System.Diagnostics.Debug.WriteLine(e);

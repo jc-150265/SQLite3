@@ -192,7 +192,7 @@ namespace SQLite11
             layout.Children.Add(deleteEntry);
             //--------------------ボタン再配置--------------------------
                         
-            if (x != null) //selectEntryが入力されてたら検索 nullなら全部表示
+            if (x != null) //selectEntryが入力されてたら検索   nullなら全部表示
             {
                 if (UserModel.selectUser(x) != null)
                 {
@@ -210,7 +210,7 @@ namespace SQLite11
                     DisplayAlert("表がないエラー", "表がないよー", "OK");
                 }
             }
-            else if (UserModel.selectUser() != null)
+            else if (UserModel.selectUser() != null) //全部表示
             {
                 var query = UserModel.selectUser(); //中身はSELECT * FROM [User] limit 15
 

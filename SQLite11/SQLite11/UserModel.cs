@@ -158,7 +158,7 @@ namespace SQLite11
 
                 try
                 {
-                    //db.DropTable<UserModel>(); //怒りのドロップテーブル！
+                    db.DropTable<UserModel>(); //怒りのドロップテーブル！
 
                     //データベースに指定したSQLを発行します
 

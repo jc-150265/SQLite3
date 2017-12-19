@@ -42,8 +42,6 @@ namespace SQLite11
 
         private Entry selectEntry; //selectの入力フィールド 入力した値で検索(where LIKE %?%)
 
-        private int a = 0; //自動で値が増えるNo列
-
         public MainPage()
         {
             InitializeComponent();
@@ -110,9 +108,8 @@ namespace SQLite11
         void InsertClicked(object sender, EventArgs e)
         {
             var InsertName = insertEntry.Text;
-            a += 1;
             //Userテーブルに適当なデータを追加する
-            UserModel.insertUser(1, InsertName,a);
+            UserModel.insertUser(1, InsertName);
         }
 
         //deleteイベントハンドラ
@@ -207,7 +204,7 @@ namespace SQLite11
                 }
                 else
                 {
-                    DisplayAlert("表がないエラー", "表がないよー", "OK");
+                    DisplayAlert("警告", "表がないエラー", "OK");
                 }
             }
             else if (UserModel.selectUser() != null) //全部表示
@@ -223,7 +220,7 @@ namespace SQLite11
             }
             else
             {
-                DisplayAlert("表がないエラー", "表がないよー", "OK");
+                DisplayAlert("警告", "表がないエラー", "OK");
             }
 
             Content = layout;

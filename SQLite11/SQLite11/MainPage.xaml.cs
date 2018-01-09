@@ -214,7 +214,7 @@ namespace SQLite11
                 }
                 else
                 {
-                    DisplayAlert("表がないエラー", "表がありません", "OK");
+                    DisplayAlert("表がないエラー", "表がないよー", "OK");
                 }
             }
             else if (UserModel.selectUser() != null) //全部表示
@@ -230,7 +230,7 @@ namespace SQLite11
             }
             else
             {
-                DisplayAlert("表がないエラー", "表がありません", "OK");
+                DisplayAlert("表がないエラー", "表がないよー", "OK");
             }
 
             Content = layout2;

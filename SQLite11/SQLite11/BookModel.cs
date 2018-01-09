@@ -48,7 +48,9 @@ namespace SQLite11
             }
         }
 
+
         //id name オーバーロード
+        //--------------------------insert文的なの--------------------------
         public static void insertBook(int id, string name)
         {
             //データベースに接続する

@@ -18,9 +18,7 @@ namespace SQLite11
 
         //名前列
         public string Name { get; set; }
-
-        //No列
-        public int No { get; set; }
+        
 
         //Userテーブルに行追加するメソッドです
             //------------------------Insertメソッド--------------------------
@@ -66,39 +64,17 @@ namespace SQLite11
 
                     db.Insert(new UserModel() { Id = id, Name = name });
                     db.Commit();
-                    return db.Query<UserModel>("SELECT * FROM [User] DESC LIMIT 15");
+                    //return db.Query<UserModel>("SELECT * FROM [User] DESC LIMIT 15");
                 }
                 catch (Exception e)
                 {
                     db.Rollback();
                     System.Diagnostics.Debug.WriteLine(e);
-                    return null;
+                    //return null;
                 }
             }
         }
-
-        //id name no オーバーロード
-        public static void insertUser(int id, string name,int no)
-        {
-            //データベースに接続する
-            using (SQLiteConnection db = new SQLiteConnection(App.dbPath))
-            {
-                try
-                {
-                    //データベースにUserテーブルを作成する
-                    db.CreateTable<UserModel>();
-
-                    db.Insert(new UserModel() { Id = id, Name = name, No = no });
-                    db.Commit();
-                }
-                catch (Exception e)
-                {
-                    db.Rollback();
-                    System.Diagnostics.Debug.WriteLine(e);
-                }
-            }
-        }
-
+        
 
         //Userテーブルのuserを削除するメソッド
         //削除メソッド参考サイト https://qiita.com/alzybaad/items/9356b5a651603a548278
@@ -114,22 +90,20 @@ namespace SQLite11
                     //データベースにUserテーブルを作成する
                     db.CreateTable<UserModel>();
 
-                    var no = db.Query<UserModel>("SELECT Id FROM [User] WHERE [Name] ="+ name);
-
-                    db.Delete<UserModel>(no);
+                    db.Delete<UserModel>(id);
                     db.Commit();
-                    return db.Query<UserModel>("SELECT * FROM [User] DESC LIMIT 15");
+                    //return db.Query<UserModel>("SELECT * FROM [User] DESC LIMIT 15");
                 }
                 catch (Exception e)
                 {
                     db.Rollback();
                     System.Diagnostics.Debug.WriteLine(e);
-                    return null;
+                    //return null;
                 }
             }
 
         }
-        */
+        
 
         //Userテーブルの行データを取得します
         //--------------------------select文的なの--------------------------
@@ -143,7 +117,7 @@ namespace SQLite11
                     //db.DropTable<UserModel>(); //怒りのドロップテーブル！
 
                     //データベースに指定したSQLを発行します
-                    return db.Query<UserModel>("SELECT * FROM [User] ORDER BY [No] DESC LIMIT 15");   //主キーでORDER BYできないっぽい
+                    return db.Query<UserModel>("SELECT * FROM [User] ORDER BY [Id] DESC LIMIT 15");   //主キーでORDER BYできた
                     //return db.Query<UserModel>("SELECT * FROM [User] limit 15");                    
                 }
                 catch (Exception e)

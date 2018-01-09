@@ -46,7 +46,11 @@ namespace SQLite11
         {
             InitializeComponent();
 
-            var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center};
+            var layout2 = new StackLayout { HorizontalOptions = LayoutOptions.CenterAndExpand, VerticalOptions = LayoutOptions.CenterAndExpand };
+            var scroll = new ScrollView { Orientation = ScrollOrientation.Vertical };
+            layout2.Children.Add(scroll);
+            var layout = new StackLayout { HorizontalOptions = LayoutOptions.CenterAndExpand, VerticalOptions = LayoutOptions.CenterAndExpand };
+            scroll.Content = layout;
 
             //--------------------------------selectします------------------------------
             var Select = new Button
@@ -100,7 +104,7 @@ namespace SQLite11
             Delete.Clicked += DeleteClicked;
             layout.Children.Add(deleteEntry);
 
-            Content = layout;
+            Content = layout2;
         }
 
 
@@ -116,10 +120,12 @@ namespace SQLite11
         void DeleteClicked(object sender, EventArgs e)
         {
             var DeleteName = deleteEntry.Text;
+            int no = int.Parse(DeleteName);
+
             if (DeleteName != null)
             {
                 //UserModel.deleteUser(1);
-                UserModel.deleteUser(int.Parse(DeleteName));
+                UserModel.deleteUser(no);
             }
             else
             {
@@ -136,7 +142,11 @@ namespace SQLite11
 
             String x = selectEntry.Text; //入力された文字を習得
 
-            var layout = new StackLayout { HorizontalOptions = LayoutOptions.Center};
+            var layout2 = new StackLayout { HorizontalOptions = LayoutOptions.CenterAndExpand, VerticalOptions = LayoutOptions.CenterAndExpand };
+            var scroll = new ScrollView { Orientation = ScrollOrientation.Vertical };
+            layout2.Children.Add(scroll);
+            var layout = new StackLayout { HorizontalOptions = LayoutOptions.CenterAndExpand, VerticalOptions = LayoutOptions.CenterAndExpand };
+            scroll.Content = layout;
 
             //--------------------ボタン再配置--------------------------
             //selectボタン
@@ -204,7 +214,7 @@ namespace SQLite11
                 }
                 else
                 {
-                    DisplayAlert("警告", "表がないエラー", "OK");
+                    DisplayAlert("表がないエラー", "表がありません", "OK");
                 }
             }
             else if (UserModel.selectUser() != null) //全部表示
@@ -220,10 +230,10 @@ namespace SQLite11
             }
             else
             {
-                DisplayAlert("警告", "表がないエラー", "OK");
+                DisplayAlert("表がないエラー", "表がありません", "OK");
             }
 
-            Content = layout;
+            Content = layout2;
         }
     }
 }

@@ -19,9 +19,42 @@ namespace SQLite11
         //名前列
         public string Name { get; set; }
 
-        //Userテーブルに行追加するメソッド
-        //------------------------Insertメソッド--------------------------
-        public static List<UserModel> insertUser(int id, string name)
+        //No列
+        public int No { get; set; }
+
+        //Userテーブルに行追加するメソッドです
+            //------------------------Insertメソッド--------------------------
+        public static void insertUser(string name)
+        {
+            //データベースに接続
+            using (SQLiteConnection db = new SQLiteConnection(App.dbPath))
+            {
+
+                try
+                {
+
+                    
+                    //データベースにUserテーブルを作成します
+                    db.CreateTable<UserModel>();
+                    
+                    //Userテーブルに行追加します
+                    db.Insert(new UserModel() { Name = name });
+
+                    db.Commit();
+
+                }
+                catch (Exception e)
+                {
+
+                    db.Rollback();
+                    System.Diagnostics.Debug.WriteLine(e);
+
+                }
+            }
+        }
+        
+        //id name オーバーロード
+        public static void insertUser(int id, string name)
         {
             //データベースに接続する
             using (SQLiteConnection db = new SQLiteConnection(App.dbPath))
@@ -44,22 +77,18 @@ namespace SQLite11
             }
         }
 
-        //Userテーブルのuserを削除するメソッド
-        //--------------------------deleteメソッド--------------------------
-        public static void deleteUser(int id)
+        //id name no オーバーロード
+        public static void insertUser(int id, string name,int no)
         {
-
-            //データベースに接続
+            //データベースに接続する
             using (SQLiteConnection db = new SQLiteConnection(App.dbPath))
-            {                
+            {
                 try
                 {
                     //データベースにUserテーブルを作成する
                     db.CreateTable<UserModel>();
 
-                    //db.DropTable<UserModel>(); 怒りのドロップテーブル！
-
-                    db.Delete<UserModel>(id);
+                    db.Insert(new UserModel() { Id = id, Name = name, No = no });
                     db.Commit();
                 }
                 catch (Exception e)
@@ -68,11 +97,13 @@ namespace SQLite11
                     System.Diagnostics.Debug.WriteLine(e);
                 }
             }
-
         }
 
-        /*
-        public static List<UserModel> deleteUser(string name)
+
+        //Userテーブルのuserを削除するメソッド
+        //削除メソッド参考サイト https://qiita.com/alzybaad/items/9356b5a651603a548278
+        //--------------------------deleteメソッド--------------------------
+        public static void deleteUser(int id)
         {
 
             //データベースに接続
@@ -112,7 +143,7 @@ namespace SQLite11
                     //db.DropTable<UserModel>(); //怒りのドロップテーブル！
 
                     //データベースに指定したSQLを発行します
-                    return db.Query<UserModel>("SELECT * FROM [User] ORDER BY [Id] DESC LIMIT 15"); //主キーでORDER BYできるやん！
+                    return db.Query<UserModel>("SELECT * FROM [User] ORDER BY [No] DESC LIMIT 15");   //主キーでORDER BYできないっぽい
                     //return db.Query<UserModel>("SELECT * FROM [User] limit 15");                    
                 }
                 catch (Exception e)
